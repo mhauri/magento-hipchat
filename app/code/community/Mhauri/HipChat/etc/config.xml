@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mhauri_HipChat>
+            <version>0.1.0</version>
+        </Mhauri_HipChat>
+    </modules>
+    <global>
+        <helpers>
+            <mhauri_hipchat>
+                <class>Mhauri_HipChat_Helper</class>
+            </mhauri_hipchat>
+        </helpers>
+        <models>
+            <mhauri_hipchat>
+                <class>Mhauri_HipChat_Model</class>
+            </mhauri_hipchat>
+        </models>
+        <resources>
+            <mhauri_hipchat_setup>
+                <setup>
+                    <module>Mhauri_HipChat</module>
+                </setup>
+            </mhauri_hipchat_setup>
+        </resources>
+    </global>
+</config>

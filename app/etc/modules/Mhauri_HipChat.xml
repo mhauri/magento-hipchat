@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mhauri_HipChat>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends></depends>
+        </Mhauri_HipChat>
+    </modules>
+</config>
