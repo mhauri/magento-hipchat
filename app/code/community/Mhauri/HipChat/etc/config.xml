@@ -1,4 +1,26 @@
 <?xml version="1.0"?>
+<!--
+Copyright (c) 2015, Marcel Hauri
+All rights reserved.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+
+@copyright Copyright 2015, Marcel Hauri (https://github.com/mhauri/magento-hipchat/)
+
+@category Notification
+@package mhauri-hipchat
+@author Marcel Hauri <marcel@hauri.me>
+-->
 <config>
     <modules>
         <Mhauri_HipChat>
@@ -23,5 +45,52 @@
                 </setup>
             </mhauri_hipchat_setup>
         </resources>
+        <events>
+            <sales_order_place_after>
+                <observers>
+                    <notifyNewOrder>
+                        <type>singleton</type>
+                        <class>mhauri_hipchat/observer</class>
+                        <method>notifyNewOrder</method>
+                    </notifyNewOrder>
+                </observers>
+            </sales_order_place_after>
+            <customer_login>
+                <observers>
+                    <notifiyUserLogin>
+                        <type>singleton</type>
+                        <class>mhauri_hipchat/observer</class>
+                        <method>notifyUserLogin</method>
+                    </notifiyUserLogin>
+                </observers>
+            </customer_login>
+        </events>
     </global>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <mhauri_hipchat>
+                    <files>
+                        <default>Mhauri_HipChat.csv</default>
+                    </files>
+                </mhauri_hipchat>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <default>
+        <hipchat>
+            <general>
+                <enable>0</enable>
+                <token/>
+                <room_id/>
+                <log>0</log>
+            </general>
+            <notification>
+                <new_order>0</new_order>
+            </notification>
+        </hipchat>
+    </default>
+
 </config>
