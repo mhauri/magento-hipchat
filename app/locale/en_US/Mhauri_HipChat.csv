@@ -1,0 +1,2 @@
+"<strong>A new order has been placed.</strong><br /><strong>Order Id:</strong> %s<br /><strong>Name:</strong> %s %s<br /><strong>Amount:</strong> %s","<strong>A new order has been placed.</strong><br /><strong>Order Id:</strong> %s<br /><strong>Name:</strong> %s %s<br /><strong>Amount:</strong> %s"
+"Admin user login failed with username: %s","Admin user login failed with username: %s"

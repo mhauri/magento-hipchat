@@ -50,20 +50,20 @@ POSSIBILITY OF SUCH DAMAGE.
                 <observers>
                     <notifyNewOrder>
                         <type>singleton</type>
-                        <class>mhauri_hipchat/observer</class>
+                        <class>Mhauri_HipChat_Model_Observer</class>
                         <method>notifyNewOrder</method>
                     </notifyNewOrder>
                 </observers>
             </sales_order_place_after>
-            <customer_login>
+            <admin_session_user_login_failed>
                 <observers>
-                    <notifiyUserLogin>
+                    <notifiyAdminUserLoginFailed>
                         <type>singleton</type>
-                        <class>mhauri_hipchat/observer</class>
-                        <method>notifyUserLogin</method>
-                    </notifiyUserLogin>
+                        <class>Mhauri_HipChat_Model_Observer</class>
+                        <method>notifiyAdminUserLoginFailed</method>
+                    </notifiyAdminUserLoginFailed>
                 </observers>
-            </customer_login>
+            </admin_session_user_login_failed>
         </events>
     </global>
 
@@ -83,9 +83,10 @@ POSSIBILITY OF SUCH DAMAGE.
         <hipchat>
             <general>
                 <enable>0</enable>
+                <log>0</log>
+                <from_name>Magento HipChat</from_name>
                 <token/>
                 <room_id/>
-                <log>0</log>
             </general>
             <notification>
                 <new_order>0</new_order>
