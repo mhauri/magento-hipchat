@@ -57,13 +57,22 @@ POSSIBILITY OF SUCH DAMAGE.
             </sales_order_place_after>
             <admin_session_user_login_failed>
                 <observers>
-                    <notifiyAdminUserLoginFailed>
+                    <notifyAdminUserLoginFailed>
                         <type>singleton</type>
                         <class>Mhauri_HipChat_Model_Observer</class>
-                        <method>notifiyAdminUserLoginFailed</method>
-                    </notifiyAdminUserLoginFailed>
+                        <method>notifyAdminUserLoginFailed</method>
+                    </notifyAdminUserLoginFailed>
                 </observers>
             </admin_session_user_login_failed>
+            <controller_action_predispatch_customer_account_createpost>
+                <observers>
+                    <notifyNewCustomer>
+                        <type>singleton</type>
+                        <class>Mhauri_HipChat_Model_Observer</class>
+                        <method>notifyNewCustomer</method>
+                    </notifyNewCustomer>
+                </observers>
+            </controller_action_predispatch_customer_account_createpost>
         </events>
     </global>
 
@@ -82,14 +91,18 @@ POSSIBILITY OF SUCH DAMAGE.
     <default>
         <hipchat>
             <general>
-                <enable>0</enable>
-                <log>0</log>
+                <enable_notification>0</enable_notification>
+                <enable_log>0</enable_log>
+            </general>
+            <api>
                 <from_name>Magento HipChat</from_name>
                 <token/>
                 <room_id/>
-            </general>
+            </api>
             <notification>
                 <new_order>0</new_order>
+                <new_customer_account>0</new_customer_account>
+                <admin_user_login_failed>0</admin_user_login_failed>
             </notification>
         </hipchat>
     </default>

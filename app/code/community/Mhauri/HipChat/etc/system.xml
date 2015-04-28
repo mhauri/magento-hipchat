@@ -41,7 +41,7 @@ POSSIBILITY OF SUCH DAMAGE.
                     <show_in_website>0</show_in_website>
                     <show_in_store>0</show_in_store>
                     <fields>
-                        <enable translate="label">
+                        <enable_notification translate="label">
                             <label>Enable HipChat notifications</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -49,8 +49,8 @@ POSSIBILITY OF SUCH DAMAGE.
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                        </enable>
-                        <log translate="label">
+                        </enable_notification>
+                        <enable_log translate="label">
                             <label>Log notifications</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -58,7 +58,17 @@ POSSIBILITY OF SUCH DAMAGE.
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                        </log>
+                        </enable_log>
+                    </fields>
+                </general>
+                <api>
+                    <label>API Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
                         <token translate="label">
                             <label>Token</label>
                             <frontend_type>text</frontend_type>
@@ -86,7 +96,7 @@ POSSIBILITY OF SUCH DAMAGE.
                             <show_in_store>0</show_in_store>
                         </from_name>
                     </fields>
-                </general>
+                </api>
                 <notification>
                     <label>Notification Settings</label>
                     <frontend_type>text</frontend_type>
@@ -104,6 +114,15 @@ POSSIBILITY OF SUCH DAMAGE.
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </new_order>
+                        <new_customer_account translate="label" module="mhauri_hipchat">
+                            <label>New Customer Account</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </new_customer_account>
                         <admin_user_login_failed translate="label" module="mhauri_hipchat">
                             <label>Admin User Login Failed</label>
                             <frontend_type>select</frontend_type>

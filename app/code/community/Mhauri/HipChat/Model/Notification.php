@@ -30,14 +30,23 @@ class Mhauri_HipChat_Model_Notification extends Mage_Core_Model_Abstract
     const LOG_FILE                      = 'hipchat.log';
     const DEFAULT_SENDER                = 'Magento HipChat';
 
-    const ENABLE_PATH                   = 'hipchat/general/enable';
-    const LOG_PATH                      = 'hipchat/general/log';
-    const TOKEN_PATH                    = 'hipchat/general/token';
-    const ROOM_ID_PATH                  = 'hipchat/general/room_id';
-    const FROM_NAME_PATH                = 'hipchat/general/from_name';
+    const ENABLE_NOTIFICATION_PATH      = 'hipchat/general/enable_notification';
+    const ENABLE_LOG_PATH               = 'hipchat/general/enable_log';
+
+    const TOKEN_PATH                    = 'hipchat/api/token';
+    const ROOM_ID_PATH                  = 'hipchat/api/room_id';
+    const FROM_NAME_PATH                = 'hipchat/api/from_name';
 
     const NEW_ORDER_PATH                = 'hipchat/notification/new_order';
+    const NEW_CUSTOMER_ACCOUNT_PATH     = 'hipchat/notification/new_customer_account';
     const ADMIN_USER_LOGIN_FAILED_PATH  = 'hipchat/notification/admin_user_login_failed';
+
+    const COLOR_YELLOW                  = 'yellow';
+    const COLOR_RED                     = 'red';
+    const COLOR_GRAY                    = 'gray';
+    const COLOR_GREEN                   = 'green';
+    const COLOR_PURPLE                  = 'purple';
+    const COLOR_RANDOM                  = 'random';
 
     /**
      * Store the HipChat Model
@@ -62,6 +71,16 @@ class Mhauri_HipChat_Model_Notification extends Mage_Core_Model_Abstract
      * @var null
      */
     private $_roomId        = null;
+
+    /**
+     * @var string
+     */
+    private $_color         = self::COLOR_YELLOW;
+
+    /**
+     * @var bool
+     */
+    private $_notify        = false;
 
     /**
      * Store token
@@ -150,6 +169,56 @@ class Mhauri_HipChat_Model_Notification extends Mage_Core_Model_Abstract
     }
 
     /**
+     * @param $color
+     * @return $this
+     */
+    public function setColor($color)
+    {
+        $allowedColors = array(
+            self::COLOR_GRAY,
+            self::COLOR_GREEN,
+            self::COLOR_PURPLE,
+            self::COLOR_RED,
+            self::COLOR_YELLOW,
+            self::COLOR_RANDOM
+        );
+
+        if(is_string($color) && in_array($color, $allowedColors)) {
+            $this->_color = $color;
+        }
+        return $this;
+    }
+
+    /**
+     * @param bool $notify
+     * @return $this
+     */
+    public function setNotify($notify = false)
+    {
+        if(is_bool($notify)) {
+            $this->_notify = $notify;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getNotify()
+    {
+        return $this->_notify;
+    }
+
+    /**
+     * @return string
+     */
+    public function getColor()
+    {
+        return $this->_color;
+    }
+
+    /**
      * @param $message
      * @return $this
      */
@@ -174,7 +243,7 @@ class Mhauri_HipChat_Model_Notification extends Mage_Core_Model_Abstract
      */
     public function isEnabled()
     {
-        return Mage::getStoreConfig(self::ENABLE_PATH, 0);
+        return Mage::getStoreConfig(self::ENABLE_NOTIFICATION_PATH, 0);
     }
 
     /**
@@ -183,8 +252,14 @@ class Mhauri_HipChat_Model_Notification extends Mage_Core_Model_Abstract
     public function send()
     {
         try {
-            $this->_hipchat->message_room($this->getRoomId(), $this->getFromName(), $this->getMessage());
-            if(Mage::getStoreConfig(self::LOG_PATH, 0)) {
+            $this->_hipchat->message_room(
+                $this->getRoomId(),
+                $this->getFromName(),
+                $this->getMessage(),
+                $this->getNotify(),
+                $this->getColor()
+            );
+            if(Mage::getStoreConfig(self::ENABLE_LOG_PATH, 0)) {
                 Mage::log('Message sent: ' . $this->_message, Zend_Log::INFO, self::LOG_FILE, true);
             }
         } catch(Exception $e) {

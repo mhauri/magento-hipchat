@@ -14,6 +14,14 @@ Facts
 
 Description
 -----------
+This extension currently uses Version 1 of the HipChat API
+Find more informations in the [API Documentation](https://www.hipchat.com/docs/api)
+
+**Available Notifications**
+
+ - Admin User Login Failed
+ - New Customer Account Created
+ - New Orders
 
 Requirements
 ------------
