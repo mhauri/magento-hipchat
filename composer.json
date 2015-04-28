@@ -4,7 +4,7 @@
     "type": "magento-module",
     "description": "Add your description here",
     "require": {
-        "magento-hackathon/magento-composer-installer": "*"
+        "magento-hackathon/magento-composer-installer": "2.*"
     },
     "authors":[
         {
