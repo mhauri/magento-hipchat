@@ -1,13 +1,11 @@
 Magento HipChat
 =============
 
-**THIS EXTENSION IS NOT YET USABLE**
-
 Magento HipChat allows you to send specific and/or custom events to a definable room. 
 
 Facts
 -----
-- version: 0.1.0
+- version: 0.2.0
 - extension key: magento-hipchat
 - [extension on GitHub](https://github.com/mhauri/magento-hipchat)
 - [direct download link](https://github.com/mhauri/magento-hipchat/archive/master.zip)
