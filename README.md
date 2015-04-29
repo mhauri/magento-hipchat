@@ -1,7 +1,7 @@
 Magento HipChat
 =============
 
-Magento HipChat allows you to send specific and/or custom events to a definable room. 
+Magento HipChat allows you to send notifications to a HipChat room. 
 
 Facts
 -----
@@ -12,8 +12,9 @@ Facts
 
 Description
 -----------
-This extension currently uses Version 1 of the HipChat API
-Find more informations in the [API Documentation](https://www.hipchat.com/docs/api)
+This extension currently uses Version 1 of the HipChat API.
+
+For more information check the [API Documentation](https://www.hipchat.com/docs/api)
 
 **Available Notifications**
 
