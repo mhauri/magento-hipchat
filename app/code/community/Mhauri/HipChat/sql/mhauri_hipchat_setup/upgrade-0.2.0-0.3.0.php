@@ -22,36 +22,30 @@
  * @author Marcel Hauri <marcel@hauri.me>
  */
 
-class Mhauri_HipChat_Model_Notification extends Mhauri_HipChat_Model_Abstract
-{
+/* @var $installer Mage_Core_Model_Resource_Setup */
+$installer = $this;
+$installer->startSetup();
 
-    /**
-     * send message to room
-     */
-    public function send()
-    {
-        if(!$this->isEnabled()) {
-            Mage::log('HipChat Notifications are not enabled!', Zend_Log::ERR, self::LOG_FILE, true);
-            return false;
-        }
+$table = $installer->getConnection()
+    ->newTable($installer->getTable('mhauri_hipchat/queue'))
+    ->addColumn('message_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
+            'identity'  => true,
+            'unsigned'  => true,
+            'nullable'  => false,
+            'primary'   => true,
+        ), 'Message Id')
+    ->addColumn('message_params', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
+            'nullable'  => false,
+            'default'   => '',
+        ), 'Message Parameters')
+    ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
+            'nullable'  => true,
+        ), 'Created At')
+    ->addColumn('processed_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
+            'nullable'  => true,
+        ), 'Processed At')
+    ->setComment('HipChat Message Queue');
 
-        $params = array(
-            'room_id'   => $this->getRoomId(),
-            'from_name' => $this->getFromName(),
-            'message'   => $this->getMessage(),
-            'notify'    => $this->getNotify(),
-            'color'     => $this->getColor()
-        );
+$installer->getConnection()->createTable($table);
 
-        if(Mage::getStoreConfig(Mhauri_HipChat_Model_Abstract::USE_QUEUE, 0)) {
-            Mage::getModel('mhauri_hipchat/queue')->addMessageToQueue($params);
-        } else {
-            try {
-                $this->sendMessage($params);
-            } catch (Exception $e) {
-                Mage::log($e->getMessage(), Zend_Log::ERR, Mhauri_Slack_Model_Abstract::LOG_FILE);
-            }
-        }
-        return true;
-    }
-}
+$installer->endSetup();

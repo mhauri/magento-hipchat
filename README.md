@@ -5,7 +5,7 @@ Magento HipChat allows you to send notifications to a HipChat room.
 
 Facts
 -----
-- version: 0.2.0
+- version: 0.3.0
 - extension key: magento-hipchat
 - [extension on GitHub](https://github.com/mhauri/magento-hipchat)
 - [direct download link](https://github.com/mhauri/magento-hipchat/archive/master.zip)
@@ -15,6 +15,7 @@ Description
 This extension currently uses Version 1 of the HipChat API.
 
 For more information check the [API Documentation](https://www.hipchat.com/docs/api)
+It is recommended to use the message queue. A [configured CronJob](http://www.magentocommerce.com/wiki/1_-_installation_and_configuration/how_to_setup_a_cron_job) is a precondition for the message queue.
 
 **Available Notifications**
 
@@ -28,7 +29,7 @@ Requirements
 
 Compatibility
 -------------
-- Magento >= 1.9
+- Magento >= 1.8
 
 Installation Instructions
 -------------------------

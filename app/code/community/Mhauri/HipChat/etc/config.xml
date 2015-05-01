@@ -24,7 +24,7 @@ POSSIBILITY OF SUCH DAMAGE.
 <config>
     <modules>
         <Mhauri_HipChat>
-            <version>0.2.0</version>
+            <version>0.3.0</version>
         </Mhauri_HipChat>
     </modules>
     <global>
@@ -36,13 +36,26 @@ POSSIBILITY OF SUCH DAMAGE.
         <models>
             <mhauri_hipchat>
                 <class>Mhauri_HipChat_Model</class>
+                <resourceModel>mhauri_hipchat_resource</resourceModel>
             </mhauri_hipchat>
+            <mhauri_hipchat_resource>
+                <class>Mhauri_HipChat_Model_Resource</class>
+                <entities>
+                    <queue>
+                        <table>hipchat_queue</table>
+                    </queue>
+                </entities>
+            </mhauri_hipchat_resource>
         </models>
         <resources>
             <mhauri_hipchat_setup>
                 <setup>
                     <module>Mhauri_HipChat</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
                 </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
             </mhauri_hipchat_setup>
         </resources>
         <events>
@@ -93,6 +106,7 @@ POSSIBILITY OF SUCH DAMAGE.
             <general>
                 <enable_notification>0</enable_notification>
                 <enable_log>0</enable_log>
+                <use_queue>1</use_queue>
             </general>
             <api>
                 <from_name>Magento HipChat</from_name>
@@ -106,5 +120,17 @@ POSSIBILITY OF SUCH DAMAGE.
             </notification>
         </hipchat>
     </default>
+    <crontab>
+        <jobs>
+            <mhauri_hipchat_queue_send_all>
+                <schedule><cron_expr>*/1 * * * *</cron_expr></schedule>
+                <run><model>mhauri_hipchat/queue::sendQueuedMessages</model></run>
+            </mhauri_hipchat_queue_send_all>
+            <mhauri_hipchat_queue_clean_up>
+                <schedule><cron_expr>0 0 * * *</cron_expr></schedule>
+                <run><model>mhauri_hipchat/queue::cleanQueue</model></run>
+            </mhauri_hipchat_queue_clean_up>
+        </jobs>
+    </crontab>
 
 </config>

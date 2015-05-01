@@ -22,36 +22,16 @@
  * @author Marcel Hauri <marcel@hauri.me>
  */
 
-class Mhauri_HipChat_Model_Notification extends Mhauri_HipChat_Model_Abstract
+class Mhauri_HipChat_Model_Resource_Queue_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
-
-    /**
-     * send message to room
-     */
-    public function send()
+    protected function _construct()
     {
-        if(!$this->isEnabled()) {
-            Mage::log('HipChat Notifications are not enabled!', Zend_Log::ERR, self::LOG_FILE, true);
-            return false;
-        }
+        $this->_init('mhauri_hipchat/queue', 'message_id');
+    }
 
-        $params = array(
-            'room_id'   => $this->getRoomId(),
-            'from_name' => $this->getFromName(),
-            'message'   => $this->getMessage(),
-            'notify'    => $this->getNotify(),
-            'color'     => $this->getColor()
-        );
-
-        if(Mage::getStoreConfig(Mhauri_HipChat_Model_Abstract::USE_QUEUE, 0)) {
-            Mage::getModel('mhauri_hipchat/queue')->addMessageToQueue($params);
-        } else {
-            try {
-                $this->sendMessage($params);
-            } catch (Exception $e) {
-                Mage::log($e->getMessage(), Zend_Log::ERR, Mhauri_Slack_Model_Abstract::LOG_FILE);
-            }
-        }
-        return true;
+    public function addOnlyForSendingFilter()
+    {
+        $this->getSelect()->where('main_table.processed_at IS NULL');
+        return $this;
     }
 }
