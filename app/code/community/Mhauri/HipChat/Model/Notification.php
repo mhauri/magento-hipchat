@@ -49,7 +49,7 @@ class Mhauri_HipChat_Model_Notification extends Mhauri_HipChat_Model_Abstract
             try {
                 $this->sendMessage($params);
             } catch (Exception $e) {
-                Mage::log($e->getMessage(), Zend_Log::ERR, Mhauri_Slack_Model_Abstract::LOG_FILE);
+                Mage::log($e->getMessage(), Zend_Log::ERR, Mhauri_HipChat_Model_Abstract::LOG_FILE);
             }
         }
         return true;
