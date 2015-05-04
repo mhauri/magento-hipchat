@@ -4,7 +4,7 @@
     "type": "magento-module",
     "description": "Magento HipChat allows you to send notifications to a HipChat room.",
     "require": {
-        "magento-hackathon/magento-composer-installer": "2.*"
+        "magento-hackathon/magento-composer-installer": "*"
     },
     "authors":[
         {
